@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.skymeter.skymeterapp.ui.home.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.skymeter.skymeterapp.ui.splash.SplashFragment"
+        android:label="SplashFragment" />
+    <fragment
+        android:id="@+id/shotsExplorerFragment"
+        android:name="com.skymeter.skymeterapp.ui.shots_explorer.ShotsExplorerFragment"
+        android:label="ShotsExplorerFragment" />
+</navigation>

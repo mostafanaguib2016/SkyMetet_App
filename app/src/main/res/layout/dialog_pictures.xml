@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_180sdp"
+        android:background="@drawable/bg_corner_white">
+
+        <TextView
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_180sdp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/camera_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_marginHorizontal="@dimen/_40sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_17ssp"
+            android:fontFamily="@font/my_font_bold"
+            android:text="@string/open_camera"
+            android:background="@drawable/bg_corner_blue"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/gallery_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_35sdp"
+            app:layout_constraintTop_toBottomOf="@id/camera_btn"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginHorizontal="@dimen/_40sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_17ssp"
+            android:fontFamily="@font/my_font_bold"
+            android:text="@string/open_gallery"
+            android:background="@drawable/bg_corner_blue"
+            android:gravity="center"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

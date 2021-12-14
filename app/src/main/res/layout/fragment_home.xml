@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guideline_v"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".5"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/guideline_h"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".5"
+            />
+
+        <include
+            android:id="@+id/upload_picture_layout"
+            layout="@layout/photo_layout"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_width="@dimen/_100sdp"
+            app:layout_constraintTop_toTopOf="@id/guideline_h"
+            app:layout_constraintBottom_toBottomOf="@id/guideline_h"
+            app:layout_constraintEnd_toStartOf="@id/guideline_v"
+            android:layout_marginEnd="@dimen/_30sdp"
+            />
+
+        <include
+            android:id="@+id/explore_pictures_layout"
+            layout="@layout/photo_layout"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_width="@dimen/_100sdp"
+            app:layout_constraintTop_toTopOf="@id/guideline_h"
+            app:layout_constraintBottom_toBottomOf="@id/guideline_h"
+            app:layout_constraintStart_toEndOf="@id/guideline_v"
+            android:layout_marginStart="@dimen/_30sdp"
+            />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
