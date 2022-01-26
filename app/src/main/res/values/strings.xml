@@ -1,10 +1,14 @@
 <resources>
     <string name="app_name">SkyMeterApp</string>
 
-    <string name="sky_meter_app">Sky Meter App</string>
+    <string name="sky_meter_app">Sky Meter</string>
     <string name="sky_shots">Sky shots</string>
     <string name="explore_shots">Explore shots</string>
     <string name="open_gallery">Open Gallery</string>
     <string name="open_camera">Open Camera</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="confirm">Confirm</string>
+    <string name="exit_app">Exit App</string>
 
 </resources>

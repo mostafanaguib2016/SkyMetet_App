@@ -16,4 +16,19 @@
         android:id="@+id/shotsExplorerFragment"
         android:name="com.skymeter.skymeterapp.ui.shots_explorer.ShotsExplorerFragment"
         android:label="ShotsExplorerFragment" />
+    <fragment
+        android:id="@+id/viewShotFragment"
+        android:name="com.skymeter.skymeterapp.ui.view_shot.ViewShotFragment"
+        android:label="ViewShotFragment" >
+
+        <action
+            android:id="@+id/action_close"
+            app:destination="@id/shotsExplorerFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+
+
 </navigation>

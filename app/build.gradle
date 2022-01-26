@@ -42,12 +42,20 @@ android {
     packagingOptions {
         exclude 'org/joda/time/format/*.properties'
     }
-    dataBinding {
+   /* dataBinding {
         enabled = true
     }
 
     viewBinding {
         enabled = true
+    }*/
+
+    buildFeatures {
+
+        dataBinding = true
+
+        // for view binding:
+        viewBinding true
     }
 
     androidExtensions {
@@ -64,6 +72,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.firebase:firebase-messaging:22.0.0'
+    implementation 'androidx.test:core-ktx:1.4.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -88,19 +97,39 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth-api-phone:17.5.1'
 
 
+    //coroutines
+//    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+//    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:1.0.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
+
+    // Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.8.2'
+    implementation 'com.squareup.retrofit2:converter-gson:2.8.2'
+    implementation 'com.squareup.moshi:moshi:1.11.0'
+    implementation 'com.squareup.moshi:moshi-kotlin:1.11.0'
+//    implementation 'com.squareup.retrofit2:converter:moshi:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-moshi:2.6.0'
+
+
     //room
-//    def room_version = "2.3.0"
-//
-//    implementation "androidx.room:room-runtime:$room_version"
-//    kapt "androidx.room:room-compiler:$room_version"
-//    implementation "androidx.room:room-ktx:$room_version"
-//    // optional - Kotlin Extensions and Coroutines support for Room
-//    implementation "androidx.room:room-ktx:$room_version"
+    def room_version = "2.3.0"
 
-//    // For ViewModel
-//    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
-//    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
-//    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation "androidx.room:room-ktx:$room_version"
 
+    // For ViewModel
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0'
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.5.31"
+    implementation 'com.commit451:PhotoView:1.2.4'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
 
+}
+kapt {
+    correctErrorTypes true
 }

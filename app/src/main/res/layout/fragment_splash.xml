@@ -6,21 +6,33 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.splash.SplashFragment">
+        android:background="@drawable/ic_sky_bg"
+        >
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".5"
+            android:id="@+id/guideline_h"
+            />
 
         <TextView
             android:id="@+id/tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guideline_h"
+            app:layout_constraintBottom_toBottomOf="@id/guideline_h"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:textSize="@dimen/_25ssp"
             android:fontFamily="@font/my_font_bold"
             android:text="@string/sky_meter_app"
             android:textColor="@color/line_focused"
-            />
+            android:elevation="@dimen/_5sdp"
+            android:gravity="center"
+            app:drawableTopCompat="@drawable/ic_logo" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
