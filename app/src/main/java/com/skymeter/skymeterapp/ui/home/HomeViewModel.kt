@@ -18,6 +18,9 @@ class HomeViewModel(
     private val _pictureMutableLiveData = MutableLiveData<List<PicturesTable>>()
     val pictureMutableLiveData = _pictureMutableLiveData
 
+    private val _deletePictureMutableLiveData = MutableLiveData<Unit>()
+    val deletePictureMutableLiveData = _deletePictureMutableLiveData
+
     fun insertPicture(picturesModel: PicturesTable){
 
         CoroutineScope(Dispatchers.IO).launch {
@@ -46,6 +49,24 @@ class HomeViewModel(
 
                 _pictureMutableLiveData.postValue(it)
                 Log.e(TAG, "getPictures: " )
+            }
+
+        }
+
+    }
+
+    fun deletePicture(id: Int){
+
+        CoroutineScope(Dispatchers.IO).launch {
+
+            kotlin.runCatching {
+                roomManager.getPicturesDao().deletePictureById(id)
+            }.onFailure {
+
+            }.onSuccess {
+
+                _deletePictureMutableLiveData.postValue(it)
+                Log.e(TAG, "getPictures: $it" )
             }
 
         }

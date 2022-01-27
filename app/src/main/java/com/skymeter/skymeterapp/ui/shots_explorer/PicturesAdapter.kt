@@ -15,10 +15,13 @@ import com.skymeter.skymeterapp.R
 import com.skymeter.skymeterapp.data.pojo.model.PicturesTable
 import com.skymeter.skymeterapp.databinding.ItemPictureBinding
 import com.skymeter.skymeterapp.ui.home.HomeFragment
+import com.skymeter.skymeterapp.utils.RecyclerViewOnItemClickListener
 import com.skymeter.skymeterapp.utils.getBitMap
 import java.lang.Exception
 
-class PicturesAdapter(val context: Context,val navController: NavController):
+class PicturesAdapter(val context: Context,
+                      val navController: NavController,
+                      val listener: RecyclerViewOnItemClickListener):
     RecyclerView.Adapter<PicturesAdapter.ViewHolder>()
 {
 
@@ -35,7 +38,7 @@ class PicturesAdapter(val context: Context,val navController: NavController):
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(list[position])
+        holder.bind(list[position],position)
     }
 
     override fun getItemCount(): Int = list.size
@@ -43,7 +46,7 @@ class PicturesAdapter(val context: Context,val navController: NavController):
     inner class ViewHolder(val binding: ItemPictureBinding):
         RecyclerView.ViewHolder(binding.root){
 
-            fun bind(item: PicturesTable){
+            fun bind(item: PicturesTable,position: Int){
 
 
                 val decodedByte =
@@ -60,8 +63,24 @@ class PicturesAdapter(val context: Context,val navController: NavController):
                     navController.navigate(R.id.viewShotFragment,bundle)
 
                 }
+
+                binding.ivDelete.setOnClickListener {
+                    listener.onImageDelete(item.picturePath,position,item.id)
+                }
+
+
             }
 
+    }
+
+    fun deleteImage(position: Int) {
+        try {
+            list.removeAt(position)
+            notifyItemRemoved(position)
+        }
+        catch (e: Exception){
+            Log.e(TAG, "deleteImage: ${e.localizedMessage}" )
+        }
     }
 
     fun submitData(list: ArrayList<PicturesTable>){
