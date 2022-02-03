@@ -27,7 +27,7 @@ fun getEncoded64ImageStringFromBitmap(bitmap: Bitmap): String? {
     
 //    val scaledBitmap = Bitmap.createScaledBitmap(bitmap,400,400,false)
     
-    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
 
     val byteFormat: ByteArray = stream.toByteArray()
     Log.e(TAG, "getEncoded64ImageStringFromBitmap: ${byteFormat.size / (1024 * 1024)}" )

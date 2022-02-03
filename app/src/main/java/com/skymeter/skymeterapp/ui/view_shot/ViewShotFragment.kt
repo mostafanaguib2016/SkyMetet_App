@@ -20,6 +20,7 @@ import android.net.Uri
 import com.skymeter.skymeterapp.ui.home.HomeViewModel
 import com.skymeter.skymeterapp.utils.DialogsListener
 import com.skymeter.skymeterapp.utils.dialogs.PicturesPickerDialog
+import com.skymeter.skymeterapp.utils.getAirPollution
 import com.theartofdev.edmodo.cropper.CropImage
 import org.koin.android.ext.android.inject
 import java.io.File
@@ -60,12 +61,28 @@ class ViewShotFragment : Fragment(),DialogsListener {
             val imageBitmap = getBitMap(imagePath)
             binding.imageView.setImageBitmap(imageBitmap)
 
+            val pollutionTxt = "Pollution percentage"
+            binding.pollutionTv.text = "$pollutionTxt : ${(getAirPollution(imageBitmap))} %"
 
+            when((getAirPollution(imageBitmap))){
+
+                in 0F..30F ->{
+                    binding.pollutionTxtTv.text = getString(R.string.low_pollution)
+                }
+
+                in 31F..60F ->{
+                    binding.pollutionTxtTv.text = getString(R.string.medium_pollution)
+                }
+                in 61F..100F ->{
+                    binding.pollutionTxtTv.text = getString(R.string.high_pollution)
+                }
+            }
 
             val pAttacher = PhotoViewAttacher(binding.imageView)
             pAttacher.update()
 
         }
+
 
         binding.ivEdit.setOnClickListener {
             val pickerDialog =
@@ -76,6 +93,8 @@ class ViewShotFragment : Fragment(),DialogsListener {
         binding.ivClose.setOnClickListener {
             navController.navigate(R.id.action_close)
         }
+
+
 
     }
 
