@@ -97,7 +97,8 @@ class ViewShotFragment : Fragment(),DialogsListener {
 
             bundle.putString("pollution",pollutionPercentage)
             bundle.putString("image",imagePath)
-
+            bundle.putString("date",date)
+            bundle.putString("time",time)
 
             navController.navigate(R.id.viewAerosolsFragment,bundle)
 

@@ -14,4 +14,13 @@
     <string name="medium_pollution">Medium pollution</string>
     <string name="high_pollution">High pollution</string>
 
+    <string name="low_aerosols">Low Aerosols</string>
+    <string name="medium_aerosols">Medium Aerosols</string>
+    <string name="high_aerosols">High Aerosols</string>
+
+    <string name="unusually_clear">Unusually Clear</string>
+    <string name="somewhat_hazy">Somewhat Hazy </string>
+    <string name="Extremely_hazy">Extremely Hazy</string>
+
+
 </resources>

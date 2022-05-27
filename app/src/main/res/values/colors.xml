@@ -36,5 +36,14 @@
     <color name="colorAccent">#000000</color>
     <color name="colorPrimary">#FFFFFF</color>
 
+    <color name="deep_blue">#3e70b7</color>
+    <color name="blue">#6483c2</color>
+    <color name="light_blue">#869bcf</color>
+    <color name="pale_blue">#aab7de</color>
+    <color name="milky">#d1d7ed</color>
+
+    <color name="yellow">#FFB73B</color>
+    <color name="red">#F44336</color>
+    <color name="green">#42FF3B</color>
 
 </resources>
