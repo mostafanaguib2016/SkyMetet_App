@@ -60,6 +60,8 @@ class PicturesAdapter(val context: Context,
                     Log.e(TAG, "bind:${item.id} " )
                     val bundle = Bundle()
                     bundle.putString("image",item.picturePath)
+                    bundle.putString("date",item.pictureDate)
+                    bundle.putString("time",item.pictureHour)
                     navController.navigate(R.id.viewShotFragment,bundle)
 
                 }

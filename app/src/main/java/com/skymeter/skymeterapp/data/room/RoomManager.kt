@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 import com.skymeter.skymeterapp.data.pojo.model.PicturesTable
 
 @Database(
-    version = 11,
+    version = 12,
     entities = [PicturesTable::class],
     exportSchema = false
 )

@@ -30,5 +30,10 @@
 
     </fragment>
 
+    <fragment
+        android:id="@+id/viewAerosolsFragment"
+        android:name="com.skymeter.skymeterapp.ui.view_shot.ViewAerosolsFragment"
+        android:label="ViewAerosolsFragment" />
+
 
 </navigation>

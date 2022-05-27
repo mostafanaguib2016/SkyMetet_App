@@ -56,13 +56,18 @@ class ViewShotFragment : Fragment(),DialogsListener {
     private fun setUi(){
 
         val imagePath = requireArguments().getString("image","")
+        val date = requireArguments().getString("date","")
+        val time = requireArguments().getString("time","")
+        var pollutionPercentage = ""
         if (imagePath.isNotEmpty()){
 
             val imageBitmap = getBitMap(imagePath)
             binding.imageView.setImageBitmap(imageBitmap)
 
             val pollutionTxt = "Pollution percentage"
-            binding.pollutionTv.text = "$pollutionTxt : ${(getAirPollution(imageBitmap))} %"
+
+            pollutionPercentage = "${(getAirPollution(imageBitmap))}"
+            binding.pollutionTv.text = "$pollutionTxt : $pollutionPercentage %"
 
             when((getAirPollution(imageBitmap))){
 
@@ -80,6 +85,21 @@ class ViewShotFragment : Fragment(),DialogsListener {
 
             val pAttacher = PhotoViewAttacher(binding.imageView)
             pAttacher.update()
+
+        }
+
+        binding.toolbar.dateTv.text = date
+        binding.toolbar.timeTv.text = time
+
+        binding.viewAerosolsTv.setOnClickListener {
+
+            val bundle = Bundle()
+
+            bundle.putString("pollution",pollutionPercentage)
+            bundle.putString("image",imagePath)
+
+
+            navController.navigate(R.id.viewAerosolsFragment,bundle)
 
         }
 

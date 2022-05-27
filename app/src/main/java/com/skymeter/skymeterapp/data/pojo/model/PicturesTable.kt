@@ -8,5 +8,9 @@ import androidx.room.PrimaryKey
 data class PicturesTable(
     @PrimaryKey(autoGenerate = true) var id: Int,
     @ColumnInfo(name = "pictureName") val pictureName: String,
-    @ColumnInfo(name = "picturePath") val picturePath: String
+    @ColumnInfo(name = "picturePath") val picturePath: String,
+    @ColumnInfo(name = "pictureDate") val pictureDate: String,
+    @ColumnInfo(name = "pictureHour") val pictureHour: String
+
+
 )

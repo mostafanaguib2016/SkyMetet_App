@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,7 @@ import com.skymeter.skymeterapp.databinding.DialogPicturesBinding
 import com.skymeter.skymeterapp.ui.home.HomeViewModel
 import com.skymeter.skymeterapp.utils.DialogsListener
 import com.skymeter.skymeterapp.utils.getEncoded64ImageStringFromBitmap
-import com.theartofdev.edmodo.cropper.CropImage
+import java.util.*
 
 class PicturesPickerDialog(val dialogsListener: DialogsListener,
                            val homeViewModel: HomeViewModel,
@@ -66,9 +67,13 @@ class PicturesPickerDialog(val dialogsListener: DialogsListener,
 
         val encodedImage = getEncoded64ImageStringFromBitmap(cropImage)
 
+        val currentDate: String = SimpleDateFormat("dd-MM-yyyy", Locale.US).format(Date())
+        val currentTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
+
+
         homeViewModel.insertPicture(
             PicturesTable(
-                0,"", encodedImage!!
+                0,"", encodedImage!!,currentDate,currentTime
             )
         )
 

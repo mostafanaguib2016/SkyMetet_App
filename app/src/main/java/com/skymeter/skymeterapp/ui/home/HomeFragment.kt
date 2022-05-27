@@ -31,6 +31,7 @@ import androidx.test.core.app.ApplicationProvider.getApplicationContext
 
 import android.content.ContextWrapper
 import android.graphics.BitmapFactory
+import android.icu.text.SimpleDateFormat
 import android.util.Log
 import androidx.test.core.app.ApplicationProvider
 import com.skymeter.skymeterapp.utils.getEncoded64ImageStringFromBitmap
@@ -38,6 +39,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.lang.Exception
+import java.util.*
 
 
 class HomeFragment : Fragment() {
@@ -126,10 +128,13 @@ class HomeFragment : Fragment() {
             binding.imageView.setImageBitmap(data?.extras?.get("data") as Bitmap?)
 
             val encodedImage = getEncoded64ImageStringFromBitmap(data?.extras?.get("data") as Bitmap)
+            val currentDate: String = SimpleDateFormat("dd-MM-yyyy", Locale.US).format(Date())
+            val currentTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
+
 
             homeViewModel.insertPicture(
                 PicturesTable(
-                    0,"", encodedImage!!
+                    0,"", encodedImage!!,currentDate,currentTime
                 )
             )
 
