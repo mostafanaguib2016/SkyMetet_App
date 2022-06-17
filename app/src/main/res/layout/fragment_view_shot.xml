@@ -92,7 +92,7 @@
             android:textSize="@dimen/_15ssp"
             android:textColor="@color/white"
             android:elevation="@dimen/_5sdp"
-            android:text="View Aerosols"
+            android:text="@string/view_results"
             android:padding="@dimen/_10sdp"
             />
 

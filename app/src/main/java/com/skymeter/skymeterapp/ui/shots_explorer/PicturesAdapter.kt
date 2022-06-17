@@ -3,6 +3,7 @@ package com.skymeter.skymeterapp.ui.shots_explorer
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
@@ -48,10 +49,7 @@ class PicturesAdapter(val context: Context,
 
             fun bind(item: PicturesTable,position: Int){
 
-
-                val decodedByte =
-                    getBitMap(item.picturePath)
-                binding.image.setImageBitmap(decodedByte)
+                binding.image.setImageURI((Uri.parse(item.pictureName)))
 
 
 
@@ -59,9 +57,10 @@ class PicturesAdapter(val context: Context,
 
                     Log.e(TAG, "bind:${item.id} " )
                     val bundle = Bundle()
-                    bundle.putString("image",item.picturePath)
+                    bundle.putString("image",item.pictureName.toString())
                     bundle.putString("date",item.pictureDate)
                     bundle.putString("time",item.pictureHour)
+                    bundle.putString("id",item.id.toString())
                     navController.navigate(R.id.viewShotFragment,bundle)
 
                 }

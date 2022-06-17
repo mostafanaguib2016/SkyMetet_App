@@ -17,10 +17,12 @@ import androidx.core.app.ActivityCompat.startActivityForResult
 
 import android.content.Intent
 import android.net.Uri
+import android.view.View.GONE
 import com.skymeter.skymeterapp.ui.home.HomeViewModel
 import com.skymeter.skymeterapp.utils.DialogsListener
 import com.skymeter.skymeterapp.utils.dialogs.PicturesPickerDialog
 import com.skymeter.skymeterapp.utils.getAirPollution
+import com.skymeter.skymeterapp.utils.getBase64
 import com.theartofdev.edmodo.cropper.CropImage
 import org.koin.android.ext.android.inject
 import java.io.File
@@ -55,33 +57,21 @@ class ViewShotFragment : Fragment(),DialogsListener {
 
     private fun setUi(){
 
+
+
         val imagePath = requireArguments().getString("image","")
         val date = requireArguments().getString("date","")
         val time = requireArguments().getString("time","")
-        var pollutionPercentage = ""
+        val id = requireArguments().getString("id","")
         if (imagePath.isNotEmpty()){
 
-            val imageBitmap = getBitMap(imagePath)
-            binding.imageView.setImageBitmap(imageBitmap)
+            val imageUri = Uri.parse(imagePath)
 
-            val pollutionTxt = "Pollution percentage"
+            binding.imageView.setImageURI(imageUri)
 
-            pollutionPercentage = "${(getAirPollution(imageBitmap))}"
-            binding.pollutionTv.text = "$pollutionTxt : $pollutionPercentage %"
+            binding.pollutionTv.visibility = GONE
+            binding.pollutionTxtTv.visibility = GONE
 
-            when((getAirPollution(imageBitmap))){
-
-                in 0F..30F ->{
-                    binding.pollutionTxtTv.text = getString(R.string.low_pollution)
-                }
-
-                in 31F..60F ->{
-                    binding.pollutionTxtTv.text = getString(R.string.medium_pollution)
-                }
-                in 61F..100F ->{
-                    binding.pollutionTxtTv.text = getString(R.string.high_pollution)
-                }
-            }
 
             val pAttacher = PhotoViewAttacher(binding.imageView)
             pAttacher.update()
@@ -95,10 +85,11 @@ class ViewShotFragment : Fragment(),DialogsListener {
 
             val bundle = Bundle()
 
-            bundle.putString("pollution",pollutionPercentage)
+//            bundle.putString("pollution",pollutionPercentage)
             bundle.putString("image",imagePath)
             bundle.putString("date",date)
             bundle.putString("time",time)
+            bundle.putString("id",id)
 
             navController.navigate(R.id.viewAerosolsFragment,bundle)
 

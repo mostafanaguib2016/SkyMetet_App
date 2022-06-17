@@ -32,8 +32,10 @@ import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import android.content.ContextWrapper
 import android.graphics.BitmapFactory
 import android.icu.text.SimpleDateFormat
+import android.net.Uri
 import android.util.Log
 import androidx.test.core.app.ApplicationProvider
+import com.skymeter.skymeterapp.utils.getBase64
 import com.skymeter.skymeterapp.utils.getEncoded64ImageStringFromBitmap
 import java.io.File
 import java.io.FileOutputStream
@@ -86,7 +88,7 @@ class HomeFragment : Fragment() {
             if (checkSelfPermission(mContext,Manifest.permission.CAMERA) !== PackageManager.PERMISSION_GRANTED) {
                 requestPermissions(arrayOf(Manifest.permission.CAMERA), MY_CAMERA_PERMISSION_CODE)
             } else {
-                val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                val cameraIntent = Intent(mContext,CapturePhotoActivity::class.java)
                 startActivityForResult(cameraIntent, CAMERA_REQUEST)
             }
 
@@ -112,7 +114,7 @@ class HomeFragment : Fragment() {
         if (requestCode === MY_CAMERA_PERMISSION_CODE) {
             if (grantResults[0] === PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(mContext, "camera permission granted", Toast.LENGTH_LONG).show()
-                val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                val cameraIntent = Intent(mContext,CapturePhotoActivity::class.java)
                 startActivityForResult(cameraIntent, CAMERA_REQUEST)
             } else {
                 Toast.makeText(mContext, "camera permission denied", Toast.LENGTH_LONG).show()
@@ -124,17 +126,19 @@ class HomeFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode === CAMERA_REQUEST && resultCode === Activity.RESULT_OK) {
-            binding.imageView.setImageBitmap(data?.extras?.get("data") as Bitmap?)
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
 
-            val encodedImage = getEncoded64ImageStringFromBitmap(data?.extras?.get("data") as Bitmap)
+            val imagePath = data?.extras?.get("imagePath") as Uri
+            binding.imageView.setImageURI(imagePath)
             val currentDate: String = SimpleDateFormat("dd-MM-yyyy", Locale.US).format(Date())
             val currentTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
+
+            val encodedImage = getBase64(imagePath,mContext)
 
 
             homeViewModel.insertPicture(
                 PicturesTable(
-                    0,"", encodedImage!!,currentDate,currentTime
+                    0,imagePath.toString(), encodedImage!!,currentDate,currentTime
                 )
             )
 

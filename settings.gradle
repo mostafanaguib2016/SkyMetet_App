@@ -1,3 +1,6 @@
 
 rootProject.name = "SkyMeterApp"
 include ':app'
+include ':openCVLibrary3414'
+include ':openCVLibrary3414'
+include ':java'

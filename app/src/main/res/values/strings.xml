@@ -21,6 +21,9 @@
     <string name="unusually_clear">Unusually Clear</string>
     <string name="somewhat_hazy">Somewhat Hazy </string>
     <string name="Extremely_hazy">Extremely Hazy</string>
+    <string name="ok">Ok</string>
+    <string name="capture_msg">Please you must capture a right picture for the sky to guarantee good results</string>
+    <string name="view_results">View Results</string>
 
 
 </resources>

@@ -9,6 +9,12 @@
         <entry key="..\:/New folder/New folder/SkyMeterApp/app/src/main/res/layout/fragment_home.xml" value="0.358695652173913" />
         <entry key="..\:/New folder/New folder/SkyMeterApp/app/src/main/res/layout/photo_layout.xml" value="0.18802083333333333" />
         <entry key="..\:/StudioProjects/SkyMeterApp/app/src/main/res/drawable/bg_corner_white.xml" value="0.1725" />
+        <entry key="..\:/StudioProjects/SkyMeterApp/app/src/main/res/drawable/ic_camera.xml" value="0.1725" />
+        <entry key="..\:/StudioProjects/SkyMeterApp/app/src/main/res/drawable/ic_cancel.xml" value="0.1725" />
+        <entry key="..\:/StudioProjects/SkyMeterApp/app/src/main/res/drawable/ic_confirm.xml" value="0.1725" />
+        <entry key="..\:/StudioProjects/SkyMeterApp/app/src/main/res/drawable/ic_confirm2.xml" value="0.1725" />
+        <entry key="..\:/StudioProjects/SkyMeterApp/app/src/main/res/layout/activity_capture_photo.xml" value="0.3605072463768116" />
+        <entry key="..\:/StudioProjects/SkyMeterApp/app/src/main/res/layout/dialog_capture_required_photo.xml" value="0.3605072463768116" />
         <entry key="..\:/StudioProjects/SkyMeterApp/app/src/main/res/layout/fragment_view_aerosols.xml" value="0.25" />
         <entry key="..\:/StudioProjects/SkyMeterApp/app/src/main/res/layout/fragment_view_shot.xml" value="0.33" />
         <entry key="..\:/StudioProjects/SkyMeterApp/app/src/main/res/layout/photo_layout.xml" value="0.3605072463768116" />

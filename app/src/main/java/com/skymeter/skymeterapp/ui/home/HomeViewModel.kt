@@ -15,7 +15,10 @@ class HomeViewModel(
 {
 
     private val TAG = HomeViewModel::class.java.simpleName
-    private val _pictureMutableLiveData = MutableLiveData<List<PicturesTable>>()
+    private val _picturesMutableLiveData = MutableLiveData<List<PicturesTable>>()
+    val picturesMutableLiveData = _picturesMutableLiveData
+
+    private val _pictureMutableLiveData = MutableLiveData<PicturesTable>()
     val pictureMutableLiveData = _pictureMutableLiveData
 
     private val _deletePictureMutableLiveData = MutableLiveData<Unit>()
@@ -47,7 +50,7 @@ class HomeViewModel(
 
             }.onSuccess {
 
-                _pictureMutableLiveData.postValue(it)
+                _picturesMutableLiveData.postValue(it)
                 Log.e(TAG, "getPictures: " )
             }
 
@@ -72,5 +75,24 @@ class HomeViewModel(
         }
 
     }
+
+    fun getPicture(id: String){
+
+        CoroutineScope(Dispatchers.IO).launch {
+
+            kotlin.runCatching {
+                roomManager.getPicturesDao().getPicture(id)
+            }.onFailure {
+
+            }.onSuccess {
+
+                _pictureMutableLiveData.postValue(it)
+                Log.e(TAG, "getPicture: $it " )
+            }
+
+        }
+
+    }
+
 
 }

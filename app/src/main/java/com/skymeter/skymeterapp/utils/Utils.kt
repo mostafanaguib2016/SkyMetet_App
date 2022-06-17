@@ -1,14 +1,19 @@
 package com.skymeter.skymeterapp.utils
 
-import android.R.attr
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.Matrix
+import android.net.Uri
+import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
-import androidx.vectordrawable.graphics.drawable.ArgbEvaluator
+import android.widget.Toast
+import androidx.exifinterface.media.ExifInterface
 import java.io.ByteArrayOutputStream
-import android.R.attr.bitmap
+import java.io.IOException
+import java.io.InputStream
 import kotlin.math.abs
 
 
@@ -21,6 +26,10 @@ fun getBitMap(picturePath: String): Bitmap {
 
 }
 
+fun getBitMap(picturePath: String,imageUri: Uri,mContext: Context): Bitmap {
+    val decodedString: ByteArray = Base64.decode(picturePath, Base64.DEFAULT)
+    return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+}
 
 fun getEncoded64ImageStringFromBitmap(bitmap: Bitmap): String? {
     val stream = ByteArrayOutputStream()
@@ -34,6 +43,59 @@ fun getEncoded64ImageStringFromBitmap(bitmap: Bitmap): String? {
     // get the base 64 string
     return Base64.encodeToString(byteFormat, Base64.NO_WRAP)
 }
+
+fun getBase64(imageUri: Uri, mContext: Context): String? {
+    try {
+
+        val bytes: ByteArray
+        val output = ByteArrayOutputStream()
+
+        val bitmap = rotateImage(
+            MediaStore.Images.Media.getBitmap(mContext.contentResolver, imageUri),
+            imageUri,mContext
+        )
+
+        bitmap.compress(Bitmap.CompressFormat.JPEG,50,output)
+        bytes = output.toByteArray()
+        Log.e(TAG, "getBase64: ${output.size() / (1024.0 * 1024.0)}" )
+
+        Log.e(TAG, "getBase64: ${bytes.size / (1024.0 * 1024.0)}" )
+        return Base64.encodeToString(bytes, Base64.NO_WRAP)
+    } catch (e: IOException) {
+        Toast.makeText(mContext, "${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+        e.printStackTrace()
+    }
+
+    return ""
+}
+
+private fun rotateImage(bitmap: Bitmap, uri: Uri,mContext: Context): Bitmap {
+
+    val inputStream: InputStream = mContext.contentResolver.openInputStream(uri)!!
+
+    val exifInterface = ExifInterface(
+        inputStream
+    )
+    val orientation = exifInterface.getAttributeInt(
+        ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
+    val matrix = Matrix()
+    when (orientation){
+        ExifInterface.ORIENTATION_ROTATE_90 -> {
+            Log.e(TAG,"ROTATION 90")
+            matrix.setRotate(90f)}
+        ExifInterface.ORIENTATION_ROTATE_180 -> {
+            Log.e(TAG,"ROTATION 180")
+            matrix.setRotate(180f)}
+        ExifInterface.ORIENTATION_ROTATE_270 -> {
+            Log.e(TAG,"ROTATION 270")
+            matrix.setRotate(270f)}
+        else -> {
+            Log.e(TAG,"ROTATION else")}
+//                matrix.setRotate(90f)}
+    }
+    return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+}
+
 
 fun getNormalGrayFromImage(bitmap: Bitmap): Float{
 
@@ -87,14 +149,13 @@ fun getNormalGrayFromImage(bitmap: Bitmap): Float{
         rgb[i] = `val`
     }
 
-//    normalGray = (0.299 * r) + (0.587 * g) + (0.114 * b)
-    // gray = (r+g+b) / 3
-
     return (((0.299 * r) + (0.587 * g) + (0.114 * b)) - ((r+g+b) / 3.0F)).toFloat()
 
 }
 
 fun getAirPollution(bitmap: Bitmap): Float{
+
+
 
      // airPollution = abs(normalGray - gray)
     return abs(getNormalGrayFromImage(bitmap))

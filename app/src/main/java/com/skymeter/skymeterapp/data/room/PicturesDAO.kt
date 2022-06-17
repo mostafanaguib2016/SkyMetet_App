@@ -15,6 +15,9 @@ interface PicturesDAO {
     @Query("SELECT * FROM PicturesTable")
     fun getPictures(): List<PicturesTable>
 
+    @Query("SELECT * FROM PicturesTable WHERE id=:id")
+    fun getPicture(id: String) : PicturesTable
+
     @Query("DELETE FROM PicturesTable WHERE id = :id")
     fun deletePictureById(id: Int)
 

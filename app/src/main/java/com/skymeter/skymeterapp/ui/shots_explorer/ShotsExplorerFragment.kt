@@ -11,8 +11,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.skymeter.skymeterapp.R
 import com.skymeter.skymeterapp.data.pojo.model.PicturesTable
@@ -60,7 +58,7 @@ class ShotsExplorerFragment : Fragment()
         binding.picturesRv.adapter = adapter
 
         homeViewModel.getPictures()
-        homeViewModel.pictureMutableLiveData.observe(viewLifecycleOwner){
+        homeViewModel.picturesMutableLiveData.observe(viewLifecycleOwner){
 
             adapter.submitData(it as ArrayList<PicturesTable>)
 
